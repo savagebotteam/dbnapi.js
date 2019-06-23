@@ -103,10 +103,10 @@ class dbnRequest {
                         response.raw += chunk;
                     });
                     res.on("end", () => {
-                        if (res.headers["content-type"].includes("application/json")) {
+                        if (typeof res.headers["content-type"] === "string" && res.headers["content-type"].includes("application/json")) {
                             response.body = JSON.parse(response.raw);
                         }
-                        //response.body = res.headers["content-type"].includes("application/json") ? JSON.parse(response.raw) : response.raw;
+                        // response.body = res.headers["content-type"].includes("application/json") ? JSON.parse(response.raw) : response.raw;
                         if (response.ok) {
                             resolve(response);
                         } else {
